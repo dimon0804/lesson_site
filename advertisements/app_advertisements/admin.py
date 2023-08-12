@@ -2,10 +2,10 @@ from django.contrib import admin
 from .models import Advertisements
 
 class AdvertisementsAdmin(admin.ModelAdmin):
-    list_display = ["id", "title", "description", "price", "created_date", "up_date", "auction"]
+    list_display = ["id", "title", "description", "price", "created_date", "up_date", "auction", "image_py"]
     list_filter = ["auction", "created_at"]
     actions = ["make_auction_as_false", "make_auction_as_true"]
-    fieldsets = (("Общее", {"fields":("title", "description")}),
+    fieldsets = (("Общее", {"fields":("title", "description", "image")}),
                  ("Финансы", {"fields":("price", "auction"), "classes":['collapse']}))
 
     @admin.action(description="Убрать возможность торга")
