@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Advertisements
-from .forms import AdvertisementForm
+from .forms import AdForm
 
 def index(request):
     advertisement = Advertisements.objects.all()
@@ -13,7 +13,7 @@ def top_sellers(request):
 
 def advertisement_post(request):
     if request.method == "POST":
-        form = AdvertisementForm(request.POST, request.FILES)
+        form = AdForm(request.POST, request.FILES)
         if form.is_valid():
             advertisement = Advertisements(**form.cleaned_data)
             advertisement.user = request.user
@@ -21,7 +21,7 @@ def advertisement_post(request):
             url = reverse("main-page")
             return redirect(url)
     else:
-        form = AdvertisementForm()
+        form = AdForm()
     context = {"form": form}
     return render(request, 'advertisement-post.html', context)
 
